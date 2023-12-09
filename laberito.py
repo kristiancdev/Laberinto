@@ -46,7 +46,7 @@ def dibujar_laberinto():
     for fila in range(filas):
         for columna in range(columnas):
             if laberinto[fila][columna] == 1:
-                dibujar_celda(columna * ancho_celda, (fila * ancho_celda)*-1)
+                dibujar_celda(columna * ancho_celda, (fila * ancho_celda) * -1)
 
 # Laberinto de ejemplo (1: pared, 0: pasillo)
 laberinto = [
@@ -71,22 +71,26 @@ laberinto_turtle.goto(30, 0)
 laberinto_turtle.pendown()
 
 
-
 # Asociar eventos de teclado a funciones
 def mover_adelante():
     global direccion_actual
-    if direccion_actual == "up" and laberinto_turtle.ycor() < (filas - 1) * (ancho_celda/2):
-        laberinto_turtle.setheading(90)
-        laberinto_turtle.forward((ancho_celda/2))
-    elif direccion_actual == "down" and laberinto_turtle.ycor() > 0:
-        laberinto_turtle.setheading(270)
-        laberinto_turtle.forward((ancho_celda/2))
-    elif direccion_actual == "left" and laberinto_turtle.xcor() > 0:
-        laberinto_turtle.setheading(180)
-        laberinto_turtle.forward((ancho_celda/2))
-    elif direccion_actual == "right" and laberinto_turtle.xcor() < (columnas - 1) * (ancho_celda/2):
-        laberinto_turtle.setheading(0)
-        laberinto_turtle.forward((ancho_celda/2))
+    siguiente_x, siguiente_y = laberinto_turtle.xcor(), laberinto_turtle.ycor()
+
+    if direccion_actual == "up":
+        siguiente_y += (ancho_celda / 2)
+    elif direccion_actual == "down":
+        siguiente_y -= (ancho_celda / 2)
+    elif direccion_actual == "left":
+        siguiente_x -= (ancho_celda / 2)
+    elif direccion_actual == "right":
+        siguiente_x += (ancho_celda / 2)
+
+    # Verificar si la próxima posición está dentro de un pasillo
+    fila = int(-siguiente_y / ancho_celda)
+    columna = int(siguiente_x / ancho_celda)
+
+    if 0 <= fila < filas and 0 <= columna < columnas and laberinto[fila][columna] == 0:
+        laberinto_turtle.goto(siguiente_x, siguiente_y)
 
 def girar_izquierda():
     global direccion_actual
