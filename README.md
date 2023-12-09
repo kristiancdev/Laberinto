@@ -26,7 +26,8 @@ La tortuga se moverá en un laberinto predefinido dibujado en la ventana Turtle.
 ## Personalización
 
 Puedes personalizar el laberinto modificando la matriz `LABERINTO` en el script.
-![Laberinto PNG]((https://github.com/kristiancdev/Laberinto/blob/master/image.png?raw=true))
+
+![Laberinto PNG](https://github.com/kristiancdev/Laberinto/blob/master/image.png?raw=true)
 
 ## Contribuir
 
